@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dogood
+  labels:
+    app: dogood
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dogood
+  template:
+    metadata:
+      labels:
+        app: dogood
+    spec:
+      containers:
+        - name: dogood
+          image: dogood
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: dogood-db-secret
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 40
+            periodSeconds: 20

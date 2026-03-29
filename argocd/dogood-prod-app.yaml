@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dogood-prod
+  namespace: argocd
+spec:
+  project: dogood
+  source:
+    repoURL: https://github.com/<your-username>/dogood-gitops.git
+    targetRevision: main
+    path: apps/dogood/overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

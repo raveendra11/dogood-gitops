@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dogood-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    networking.gke.io/managed-certificates: "dogood-cert"
+spec:
+  defaultBackend:
+    service:
+      name: dogood-service
+      port:
+        number: 80
