@@ -10,4 +10,4 @@ patches:
 
 images:
   - name: us-central1-docker.pkg.dev/dogood-488720/dogood-repo/dogood
-    newTag: latest
+    newTag: 1c60e4f
